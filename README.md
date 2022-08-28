@@ -1,38 +1,72 @@
-# create-svelte
+# Ready, Svelte, GO!
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+SvelteKit project template, which includes [TailwindCSS](https://tailwindcss.com), [Storybook](https://storybook.js.org) 
 
-## Creating a project
+## Usage
 
-If you're seeing this, you've probably already done this step. Congrats!
+## How I did it
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### The Node issue
 
-# create a new project in my-app
-npm create svelte@latest my-app
+Newer versions of Node have issues with SSL, so install and use LTS
+
+```sh
+nvm install --lts
+nvm use --lts
 ```
 
-## Developing
+### SvelteKit
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Create a SvelteKit project and install its dependencies
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```sh
+npm create svelte@latest ready-svelte-go
+cd ready-svelte-go
+npm install -D
 ```
 
-## Building
+Add the following lines to `vite.config.ts`. Without them, HMR might not not work under WSL2
 
-To create a production version of your app:
-
-```bash
-npm run build
+```ts
+server: {
+    hmr: true,
+    watch: {
+        usePolling: true,
+    },
+},
 ```
 
-You can preview the production build with `npm run preview`.
+### Storybook
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Install Storybook
+
+```sh
+npx sb init --builder storybook-builder-vite
+```
+
+In `.storybook/main.cjs` replace the string
+
+```cjs
+"preprocess": require("../svelte.config.js").preprocess
+```
+
+with
+
+```cjs
+"preprocess": import("../svelte.config.js").preprocess
+```
+
+### TailwindCSS
+
+Add TailwindCSS to the project
+
+```sh
+npm svelte-add@latest tailwindcss
+```
+
+Install required dependencies
+
+```sh
+npm install -D
+```
+
