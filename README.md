@@ -7,10 +7,16 @@ SvelteKit project template, which includes [TailwindCSS](https://tailwindcss.com
 Simply run:
 
 ```sh
-
+npx degit zrgio/ready-svelte-go
 ```
 
-## How I did it
+Then:
+
+```sh
+npm install --save-dev --legacy-peer-deps=true
+```
+
+## How It's done
 
 ### The Node issue
 
@@ -49,19 +55,64 @@ Without them, HMR might not not work under WSL2.
 Install Storybook:
 
 ```sh
-npx sb init --builder storybook-builder-vite
+npx storybook init
+
 ```
 
-In `.storybook/main.cjs` replace the string:
+Then run:
 
-```cjs
-"preprocess": require("../svelte.config.js").preprocess
+```sh
+npm install --save-dev --leacy-peer-deps=true
 ```
 
-with:
+Replace `.storybook/main.cjs`'s content with:
 
 ```cjs
-"preprocess": import("../svelte.config.js").preprocess
+module.exports = {
+  "stories": [
+    "../src/**/*.stories.mdx",
+    "../src/**/*.stories.@(js|jsx|ts|tsx|svelte)"
+  ],
+  "addons": [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "storybook-dark-mode"
+  ],
+  "framework": "@storybook/svelte",
+  "core": {
+    "builder": "@storybook/builder-vite",
+    "disableTelemetry": true
+  },
+  "svelteOptions": {
+    "preprocess": import("../svelte.config.js").preprocess
+  },
+  "features": {
+    "storyStoreV7": true
+  }
+}
+```
+
+Replace `.storybook/preview.cjs`
+
+```cjs
+import { themes } from '@storybook/theming';
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  darkMode: {
+    // Override the default dark theme
+    dark: { ...themes.dark, appBg: 'black' },
+    // Override the default light theme
+    light: { ...themes.normal, appBg: 'red' }
+  }
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
+    },
+  },
+}
 ```
 
 ### TailwindCSS
