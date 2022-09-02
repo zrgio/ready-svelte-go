@@ -4,16 +4,34 @@ SvelteKit project template, which includes [TailwindCSS](https://tailwindcss.com
 
 ## Usage
 
-Simply run:
+Clone this repo:
 
 ```sh
-npx degit zrgio/ready-svelte-go
+npx degit zrgio/ready-svelte-go new-project
 ```
 
-Then:
+Install dependencies:
 
 ```sh
+cd new-project
 npm install --save-dev --legacy-peer-deps=true
+```
+
+Optionally, rename `ready-svelte-go` inside `package.json`.
+
+```sh
+sed -i '/name/s/ready-svelte-go/new-project/' package.json
+```
+
+Too many steps? paste this function in your `.*rc` file (don't forget to `source it!):
+
+```sh
+function svelte-init() {
+    npx degit zrgio/ready-svelte-go "$1"
+    cd "$1"
+    sed -i "/name/s/ready-svelte-go/$1/" package.json
+    npm install --save-dev --legacy-peer-deps=true
+}
 ```
 
 ## How It's done
@@ -56,7 +74,6 @@ Install Storybook:
 
 ```sh
 npx storybook init
-
 ```
 
 Then run:
@@ -74,10 +91,19 @@ module.exports = {
     "../src/**/*.stories.@(js|jsx|ts|tsx|svelte)"
   ],
   "addons": [
+    "storybook-dark-mode",
+    "storybook-css-modules-preset",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-dark-mode"
+    {
+        "name": "@storybook/addon-postcss",
+        "options": {
+            "postcssLoaderOptions": {
+                "implementation": import("postcss"),
+            },
+        },
+    },
   ],
   "framework": "@storybook/svelte",
   "core": {
@@ -93,10 +119,11 @@ module.exports = {
 }
 ```
 
-Replace `.storybook/preview.cjs`
+Replace `.storybook/preview.cjs`'s content with:
 
 ```cjs
 import { themes } from '@storybook/theming';
+import '../src/app.postcss'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

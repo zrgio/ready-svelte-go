@@ -4,10 +4,19 @@ module.exports = {
     "../src/**/*.stories.@(js|jsx|ts|tsx|svelte)"
   ],
   "addons": [
+    "storybook-dark-mode",
+    "storybook-css-modules-preset",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-dark-mode"
+    {
+        "name": "@storybook/addon-postcss",
+        "options": {
+            "postcssLoaderOptions": {
+                "implementation": import("postcss"),
+            },
+        },
+    },
   ],
   "framework": "@storybook/svelte",
   "core": {
