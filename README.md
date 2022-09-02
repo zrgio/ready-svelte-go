@@ -14,7 +14,7 @@ Install dependencies:
 
 ```sh
 cd new-project
-npm install --save-dev --legacy-peer-deps=true
+npm install --save-dev -D --legacy-peer-deps=true
 ```
 
 Optionally, rename `ready-svelte-go` inside `package.json`.
@@ -30,7 +30,7 @@ function svelte-init() {
     npx degit zrgio/ready-svelte-go "$1"
     cd "$1"
     sed -i "/name/s/ready-svelte-go/$1/" package.json
-    npm install --save-dev --legacy-peer-deps=true
+    npm install --save-dev -D --legacy-peer-deps=true
 }
 ```
 
