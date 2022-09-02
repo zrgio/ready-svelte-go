@@ -23,7 +23,7 @@ Optionally, rename `ready-svelte-go` inside `package.json`.
 sed -i '/name/s/ready-svelte-go/new-project/' package.json
 ```
 
-Too many steps? paste this function in your `.*rc` file (don't forget to `source it!):
+Too many steps? paste this function in your `.*rc` file (don't forget to `source` it!):
 
 ```sh
 function svelte-init() {
