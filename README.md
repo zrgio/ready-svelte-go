@@ -88,7 +88,7 @@ Replace `.storybook/main.cjs`'s content with:
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx|svelte)"
+    "../src/**/*.stories.@(js|jsx|ts|tsx|svelte)",
   ],
   "addons": [
     "storybook-dark-mode",
@@ -108,13 +108,13 @@ module.exports = {
   "framework": "@storybook/svelte",
   "core": {
     "builder": "@storybook/builder-vite",
-    "disableTelemetry": true
+    "disableTelemetry": true,
   },
   "svelteOptions": {
     "preprocess": import("../svelte.config.js").preprocess
   },
   "features": {
-    "storyStoreV7": true
+    "storyStoreV7": true,
   }
 }
 ```
@@ -131,8 +131,8 @@ export const parameters = {
     // Override the default dark theme
     dark: { ...themes.dark, appBg: 'black' },
     // Override the default light theme
-    light: { ...themes.normal, appBg: 'red' }
-  }
+    light: { ...themes.normal, appBg: 'red' },
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,
