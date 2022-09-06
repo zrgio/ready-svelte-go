@@ -1,5 +1,5 @@
+import 'tailwindcss/tailwind.css';
 import { themes } from '@storybook/theming';
-import '../src/app.postcss'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -7,8 +7,8 @@ export const parameters = {
     // Override the default dark theme
     dark: { ...themes.dark, appBg: 'black' },
     // Override the default light theme
-    light: { ...themes.normal, appBg: 'red' }
-  }
+    light: { ...themes.normal, appBg: 'red' },
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,

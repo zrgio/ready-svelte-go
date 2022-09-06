@@ -21,12 +21,12 @@ module.exports = {
   "framework": "@storybook/svelte",
   "core": {
     "builder": "@storybook/builder-vite",
-    "disableTelemetry": true
+    "disableTelemetry": true,
   },
   "svelteOptions": {
-    "preprocess": import("../svelte.config.js").preprocess
+    "preprocess": import("../svelte.config.js").preprocess,
   },
   "features": {
-    "storyStoreV7": true
-  }
+    "storyStoreV7": true,
+  },
 }
