@@ -12,7 +12,8 @@
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "develop": "concurrently --kill-others \"npm run dev -- --open\" \"npm run storybook\""
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
@@ -31,6 +32,7 @@
     "@typescript-eslint/parser": "^5.27.0",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
+    "concurrently": "^7.3.0",
     "daisyui": "^2.24.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.3.0",
