@@ -23,6 +23,14 @@ Optionally, rename `ready-svelte-go` inside `package.json`.
 sed -i '/name/s/ready-svelte-go/new-project/' package.json
 ```
 
+Finally, run:
+
+```sh
+npm run develop
+```
+
+Which will run both SvelteKit and Storybook
+
 Too many steps? paste this function in your `.*rc` file (don't forget to `source` it!):
 
 ```sh
